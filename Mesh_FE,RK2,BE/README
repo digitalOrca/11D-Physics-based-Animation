@@ -1,0 +1,5 @@
+To verify the correctness of integrator, run the oscillator case and the terminal will print the displacement at 1 second.
+
+Following are the modification made while implementing the 2D Mesh Scenario:
+mesh.cpp has been modified to create both forward and backward edge
+AnchorForce class is not used, instead, mouseForce is treated as a regular spring force
