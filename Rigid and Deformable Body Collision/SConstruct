@@ -1,0 +1,34 @@
+import os
+
+# If you compiled GLFW from source, comment out the section immediately below
+# and uncomment the one after it. Change glfw_path to wherever your GLFW is.
+
+env = Environment(
+    ENV = {'PATH' : os.environ.get('PATH', '')},
+    CXXFLAGS = '-std=c++11 -O3 -Wno-deprecated-declarations',
+    FRAMEWORKS = ['Cocoa', 'OpenGL', 'IOKit', 'CoreVideo']
+)
+env.ParseConfig('pkg-config --cflags eigen3 glfw3 glu')
+env.ParseConfig('pkg-config --cflags --static --libs glfw3 glu')
+
+# glfw_path = '../glfw-3.2.1' ### CHANGE THIS
+# env = Environment(
+#     ENV = {'PATH' : os.environ.get('PATH', '')},
+#     CXXFLAGS = '-std=c++11 -O3 -Wno-deprecated-declarations',
+#     CPPPATH = [glfw_path+'/include'],
+#     LIBPATH = [glfw_path+'/src'],
+#     LIBS = ['glfw3', 'GLU', 'GL', 'X11', 'Xxf86vm', 'pthread', 'dl', 'Xrandr', 'Xinerama', 'Xcursor']
+# )
+# env.ParseConfig('pkg-config --cflags eigen3')
+
+debug = ARGUMENTS.get('debug', 0)
+if int(debug):
+    env.Append(CCFLAGS = '-g')
+
+env.Program(['main.cpp',
+             'collision.cpp',
+             'grid.cpp',
+             'gui.cpp',
+             'mesh.cpp',
+             'particles.cpp',
+             'rigid.cpp'])
