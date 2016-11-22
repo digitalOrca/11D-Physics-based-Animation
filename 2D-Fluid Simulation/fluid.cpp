@@ -35,10 +35,6 @@ void advectVectorField(const StaggeredGrid &u, StaggeredGrid &v0,
 }
 
 int enumerateCells(Grid<int> &index) {
-    // Right now, what this function does isn't very interesting,
-    // but if some cells were marked as obstacles, or filled with air
-    // in a liquid simulation, it would be more useful as we would skip
-    // those cells in the enumeration.
     int N = 0;
     for (int i = 0; i < index.m; i++)
         for (int j = 0; j < index.n; j++)
@@ -54,7 +50,6 @@ Fluid::Fluid(int m, int n, Vector2d x0, double dx) {
     this->p = Grid<double>(m,n,x0,dx);
     p.assign(1);
     this->index = Grid<int>(m,n,x0,dx);
-    // Also call enumerateCells here to initialize index and N
     this->N = enumerateCells(index);
 }
 
@@ -64,7 +59,7 @@ void Fluid::step(double dt) {
 }
 
 void Fluid::advection(double dt) {
-	// u self advection
+    // u self advection
     advectVectorField(*u, *u, *u_tmp, dt);
     // Swap pointer
     StaggeredGrid *handle;
