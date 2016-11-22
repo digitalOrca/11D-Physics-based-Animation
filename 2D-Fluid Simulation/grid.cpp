@@ -45,7 +45,6 @@ StaggeredGrid::StaggeredGrid(int m, int n, Vector2d x0, double dx) {
 }
 
 void StaggeredGrid::assign(Vector2d value) {
-    // TODO
 }
 
 Vector2d StaggeredGrid::interpolate(Vector2d p) const { 
