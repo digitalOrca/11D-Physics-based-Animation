@@ -45,12 +45,8 @@ public:
     Vector2d interpolate(Vector2d p) const;
 };
 
-// Writes gradient of p into grad_p.
-// Assumes both are initialized with compatible sizes.
 void gradient(const Grid<double> &p, StaggeredGrid &grad_p);
 
-// Writes divergence of u into div_u.
-// Assumes both are initialized with compatible sizes.
 void divergence(const StaggeredGrid &u, Grid<double> &div_u);
 
 #endif
