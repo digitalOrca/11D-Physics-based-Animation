@@ -1,0 +1,29 @@
+import os
+
+env = Environment(
+    ENV = {'PATH' : os.environ.get('PATH', '')},
+    CXXFLAGS = '-std=c++11 -O3 -Wno-deprecated-declarations',
+    FRAMEWORKS = ['Cocoa', 'OpenGL', 'IOKit', 'CoreVideo'],
+)
+env.ParseConfig('pkg-config --cflags eigen3 glfw3 glu')
+env.ParseConfig('pkg-config --cflags --static --libs glfw3 glu')
+
+debug = ARGUMENTS.get('debug', 0)
+if int(debug):
+    env.Append(CCFLAGS = '-g')
+
+env.Program(['main.cpp',
+             'grid.cpp',
+             'gui.cpp',
+             'mesh.cpp',
+             'rigid.cpp',
+             'rigidsystem.cpp',
+             'qpsolver.cpp',
+             'ALGLIB/ap.cpp',
+             'ALGLIB/alglibinternal.cpp',
+ 			 'ALGLIB/alglibmisc.cpp',
+ 			 'ALGLIB/linalg.cpp',
+			 'ALGLIB/solvers.cpp',
+			 'ALGLIB/optimization.cpp'
+			 ])
+
